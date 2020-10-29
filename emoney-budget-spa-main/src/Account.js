@@ -63,7 +63,7 @@ class Account extends React.Component {
                           <option value="FOOD_AND_DRINKS">FOOD_AND_DRINKS</option>
                       </select>
                   </td>
-                  <td><NavLink to={"/SplitTransaction/" + transaction.transaction_id + "/" + transaction.merchant_name}>Split Transaction</NavLink></td>
+                  <td><NavLink to={"/SplitTransaction/" + this.props.match.params.account_number + "/" + transaction.transaction_id + "/" + transaction.merchant_name}>Split Transaction</NavLink></td>
                 </tr>
                )
       })

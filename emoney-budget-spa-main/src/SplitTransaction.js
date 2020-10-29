@@ -11,15 +11,17 @@ class SplitTransaction extends React.Component {
         this.state = {
           parentTransaction: {
             parent_transaction_id: props.match.params.parent_transaction_id,
-            split_transactions_exist: false
+            split_transactions_exist: true
           },
           firstSplitTransaction: {
+            account_number: props.match.params.account_number,
             parent_transaction_id: props.match.params.parent_transaction_id,
             merchant_name: props.match.params.parent_transaction_merchant_name,
             transaction_amount: 0,
             transaction_category: ''
           },
           secondSplitTransaction: {
+            account_number: props.match.params.account_number,
             parent_transaction_id: props.match.params.parent_transaction_id,
             merchant_name: props.match.params.parent_transaction_merchant_name,
             transaction_amount: 0,
@@ -61,16 +63,41 @@ class SplitTransaction extends React.Component {
         this.setState({ o });
     }
 
-    onSplitTransactionSaveClicked(e){
+    async onSplitTransactionSaveClicked(e){
         e.preventDefault();
 
-        alert(this.state.firstSplitTransaction.transaction_amount);
-        alert(this.state.firstSplitTransaction.transaction_category);
+        const postUrl = 'http://127.0.0.1:8000/budget/transactions/';
+        const putUrl = 'http://127.0.0.1:8000/budget/transactions/' + this.props.match.params.parent_transaction_id;
 
-        alert(this.state.secondSplitTransaction.transaction_amount);
-        alert(this.state.secondSplitTransaction.transaction_category);
+        // Create: First split transaction
+        const optionsFirstSplitTransaction = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.state.firstSplitTransaction)
+        };
 
+        const response = await fetch(postUrl, optionsFirstSplitTransaction);
+        await response.json();
 
+        // Create: Second split transaction
+        const optionsSecondSplitTransaction = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.state.secondSplitTransaction)
+        };
+
+        response = await fetch(postUrl, optionsSecondSplitTransaction);
+        await response.json();
+
+        // Update: Parent transaction
+        const optionsParentTransaction = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.state.parentTransaction)
+        };
+
+        response = await fetch(putUrl, optionsParentTransaction);
+        await response.json();
     }
 
 
