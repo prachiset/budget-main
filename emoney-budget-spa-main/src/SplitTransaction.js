@@ -9,43 +9,70 @@ class SplitTransaction extends React.Component {
         super();
 
         this.state = {
-          //props.match.params.parent_transaction_id,
-          splitTransaction1TransactionAmount: 0,
-          splitTransaction1TransactionCategory: '',
-
-          splitTransaction2TransactionAmount: 0,
-          splitTransaction2TransactionCategory: '',
+          parentTransaction: {
+            parent_transaction_id: props.match.params.parent_transaction_id,
+            split_transactions_exist: false
+          },
+          firstSplitTransaction: {
+            parent_transaction_id: props.match.params.parent_transaction_id,
+            merchant_name: props.match.params.parent_transaction_merchant_name,
+            transaction_amount: 0,
+            transaction_category: ''
+          },
+          secondSplitTransaction: {
+            parent_transaction_id: props.match.params.parent_transaction_id,
+            merchant_name: props.match.params.parent_transaction_merchant_name,
+            transaction_amount: 0,
+            transaction_category: ''
+          }
         };
 
-        this.onSplitTransaction1AmountChanged = this.onSplitTransaction1AmountChanged.bind(this);
-        this.onSplitTransaction1CategoryChanged = this.onSplitTransaction1CategoryChanged.bind(this);
+        this.onFirstSplitTransactionAmountChanged = this.onFirstSplitTransactionAmountChanged.bind(this);
+        this.onFirstSplitTransactionCategoryChanged = this.onFirstSplitTransactionCategoryChanged.bind(this);
 
-        this.onSplitTransaction2AmountChanged = this.onSplitTransaction2AmountChanged.bind(this);
-        this.onSplitTransaction2CategoryChanged = this.onSplitTransaction2CategoryChanged.bind(this);
+        this.onSecondSplitTransactionAmountChanged = this.onSecondSplitTransactionAmountChanged.bind(this);
+        this.onSecondSplitTransactionCategoryChanged = this.onSecondSplitTransactionCategoryChanged.bind(this);
 
         this.onSplitTransactionSaveClicked = this.onSplitTransactionSaveClicked.bind(this);
     }
 
-    onSplitTransaction1AmountChanged(e) {
-        this.setState({ splitTransaction1TransactionAmount: e.target.value });
+    onFirstSplitTransactionAmountChanged(e) {
+        var o = this.state.firstSplitTransaction;
+        o.transaction_amount = e.target.value;
+        this.setState({ o });
     }
 
-    onSplitTransaction1CategoryChanged(e){
-        this.setState({ splitTransaction1TransactionCategory: e.target.value });
+    onFirstSplitTransactionCategoryChanged(e){
+        var o = this.state.firstSplitTransaction;
+        o.transaction_category = e.target.value;
+        this.setState({ o });
     }
 
 
-    onSplitTransaction2AmountChanged(e) {
-        this.setState({ splitTransaction2TransactionAmount: e.target.value });
+    onSecondSplitTransactionAmountChanged(e) {
+        var o = this.state.secondSplitTransaction;
+        o.transaction_amount = e.target.value;
+        this.setState({ o });
     }
 
-    onSplitTransaction2CategoryChanged(e){
-        this.setState({ splitTransaction2TransactionCategory: e.target.value });
+    onSecondSplitTransactionCategoryChanged(e){
+        var o = this.state.secondSplitTransaction;
+        o.transaction_category = e.target.value;
+        this.setState({ o });
     }
 
     onSplitTransactionSaveClicked(e){
+        e.preventDefault();
+
+        alert(this.state.firstSplitTransaction.transaction_amount);
+        alert(this.state.firstSplitTransaction.transaction_category);
+
+        alert(this.state.secondSplitTransaction.transaction_amount);
+        alert(this.state.secondSplitTransaction.transaction_category);
+
 
     }
+
 
   renderHeader() {
       let header = ['Merchant Name','Transaction Amount','Transaction Category']
@@ -54,13 +81,13 @@ class SplitTransaction extends React.Component {
       })
   }
 
-  renderRowData1() {
+  renderFirstRowData() {
             return (
                 <tr>
                   <td>{this.props.match.params.parent_transaction_merchant_name}</td>
-                  <td><input type="text" value={this.state.splitTransaction1TransactionAmount} onChange={this.onSplitTransaction1AmountChanged}/></td>
+                  <td><input type="text" value={this.state.firstSplitTransaction.transaction_amount} onChange={this.onFirstSplitTransactionAmountChanged}/></td>
                   <td>
-                      <select value={this.state.splitTransaction1TransactionCategory} onChange={this.onSplitTransaction1CategoryChanged}>
+                      <select value={this.state.firstSplitTransaction.transaction_category} onChange={this.onFirstSplitTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
                           <option value="ELECTRONICS">ELECTRONICS</option>
                           <option value="GAS">GAS</option>
@@ -71,13 +98,13 @@ class SplitTransaction extends React.Component {
                )
   }
 
-    renderRowData2() {
+    renderSecondRowData() {
             return (
                 <tr>
                   <td>{this.props.match.params.parent_transaction_merchant_name}</td>
-                  <td><input type="text" value={this.state.splitTransaction2TransactionAmount} onChange={this.onSplitTransaction2AmountChanged}/></td>
+                  <td><input type="text" value={this.state.secondSplitTransaction.transaction_amount} onChange={this.onSecondSplitTransactionAmountChanged}/></td>
                   <td>
-                      <select value={this.state.splitTransaction2TransactionCategory} onChange={this.onSplitTransaction2CategoryChanged}>
+                      <select value={this.state.secondSplitTransaction.transaction_category} onChange={this.onSecondSplitTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
                           <option value="ELECTRONICS">ELECTRONICS</option>
                           <option value="GAS">GAS</option>
@@ -98,8 +125,8 @@ class SplitTransaction extends React.Component {
             <table className='tableList'>
                <tbody>
                 <tr>{this.renderHeader()}</tr>
-                    {this.renderRowData1()}
-                    {this.renderRowData2()}
+                    {this.renderFirstRowData()}
+                    {this.renderSecondRowData()}
                </tbody>
             </table>
             <button type="submit" onClick={this.onSplitTransactionSaveClicked}>Save</button>

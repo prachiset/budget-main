@@ -37,7 +37,7 @@ class Account extends React.Component {
       }
 
     onTransactionCategoryChanged(e){
-        alert(e.target.getAttribute("data-transactionRef"));
+        alert(e.target.getAttribute("data-transaction-ref"));
     }
 
   renderHeader() {
@@ -56,7 +56,7 @@ class Account extends React.Component {
                   <td>{transaction.transaction_amount}</td>
                   <td>{transaction.transaction_date}</td>
                   <td>
-                      <select id="transaction_category" value={transaction.transaction_category} data-transactionRef={transaction.transaction_id} onChange={this.onTransactionCategoryChanged}>
+                      <select id="transaction_category" value={transaction.transaction_category} data-transaction-ref={transaction.transaction_id} onChange={this.onTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
                           <option value="ELECTRONICS">ELECTRONICS</option>
                           <option value="GAS">GAS</option>
