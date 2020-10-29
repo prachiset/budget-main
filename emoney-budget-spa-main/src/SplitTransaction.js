@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Redirect,
   NavLink
 } from "react-router-dom";
 import logo from './split.png';
@@ -9,6 +10,7 @@ class SplitTransaction extends React.Component {
         super();
 
         this.state = {
+          splitRequestCompletedSuccessfully: false,
           parentTransaction: {
             parent_transaction_id: props.match.params.parent_transaction_id,
             split_transactions_exist: true
@@ -98,6 +100,10 @@ class SplitTransaction extends React.Component {
 
         response = await fetch(putUrl, optionsParentTransaction);
         await response.json();
+
+        this.setState({
+              splitRequestCompletedSuccessfully: true,
+            });
     }
 
 
@@ -143,22 +149,27 @@ class SplitTransaction extends React.Component {
   }
 
   render() {
-         return (
-         <div>
-            <ul className="header">
-              <li><NavLink to="/Dashboard">Dashboard</NavLink></li>
-            </ul>
-            <div style={{color: "#008080"}}><h1 id='title'><img src={logo} alt="Split Transaction" className="image-container"/></h1></div>
-            <table className='tableList'>
-               <tbody>
-                <tr>{this.renderHeader()}</tr>
-                    {this.renderFirstRowData()}
-                    {this.renderSecondRowData()}
-               </tbody>
-            </table>
-            <button type="submit" onClick={this.onSplitTransactionSaveClicked}>Save</button>
-         </div>
-      );
+    if(this.state.splitRequestCompletedSuccessfully === true) {
+            return (<Redirect to="/Dashboard/" />);
+        }
+        else {
+             return (
+             <div>
+                <ul className="header">
+                  <li><NavLink to="/Dashboard">Dashboard</NavLink></li>
+                </ul>
+                <div style={{color: "#008080"}}><h1 id='title'><img src={logo} alt="Split Transaction" className="image-container"/></h1></div>
+                <table className='tableList'>
+                   <tbody>
+                    <tr>{this.renderHeader()}</tr>
+                        {this.renderFirstRowData()}
+                        {this.renderSecondRowData()}
+                   </tbody>
+                </table>
+                <button type="submit" onClick={this.onSplitTransactionSaveClicked}>Save</button>
+             </div>
+          );
+      }
   }
 }
 
