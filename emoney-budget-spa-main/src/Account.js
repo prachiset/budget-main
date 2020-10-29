@@ -36,8 +36,27 @@ class Account extends React.Component {
         });
       }
 
-    onTransactionCategoryChanged(e){
-        alert(e.target.getAttribute("data-transaction-ref"));
+    async onTransactionCategoryChanged(e){
+        var transaction_ref = e.target.getAttribute("data-transaction-ref");
+        var merchant_name = e.target.getAttribute("data-merchant-name-ref");
+        var account_number = e.target.getAttribute("data-account-number-ref");
+
+        var body = {
+            "account_number":account_number,
+            "merchant_name": merchant_name,
+            "transaction_category": e.target.value
+        };
+
+        // Update: Transaction Category
+        const optionsParentTransaction = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        };
+
+        const putUrl = 'http://127.0.0.1:8000/transactions/' + transaction_ref + "/";
+        var response = await fetch(putUrl, optionsParentTransaction);
+        await response.json();
     }
 
   renderHeader() {
@@ -56,7 +75,7 @@ class Account extends React.Component {
                   <td>{transaction.transaction_amount}</td>
                   <td>{transaction.transaction_date}</td>
                   <td>
-                      <select id="transaction_category" value={transaction.transaction_category} data-transaction-ref={transaction.transaction_id} onChange={this.onTransactionCategoryChanged}>
+                      <select id="transaction_category" value={transaction.transaction_category} data-transaction-ref={transaction.transaction_id} data-account-number-ref={this.props.match.params.account_number} data-merchant-name-ref={transaction.merchant_name} onChange={this.onTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
                           <option value="ELECTRONICS">ELECTRONICS</option>
                           <option value="GAS">GAS</option>
