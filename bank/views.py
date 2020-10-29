@@ -48,13 +48,16 @@ class TransactionCategorySum(viewsets.ModelViewSet):
     serializer_class = TransactionCategorySerializer
 
     def get_queryset(self):
+        account_number = self.request.GET.get('account_number')
         if self.request.method == 'GET' and 'month' in self.request.GET:
             transaction_month = self.request.GET.get('month')
-            qs = Transaction.objects.filter(transaction_date__month=transaction_month) \
+            qs = Transaction.objects.filter(account_number=account_number).\
+                filter(transaction_date__month=transaction_month) \
                 .values('transaction_category').annotate(category_sum=Sum('transaction_amount')).order_by(
                 '-category_sum')
             return qs
         else:
-            qs = Transaction.objects.values('transaction_category').annotate(category_sum=Sum('transaction_amount')). \
+            qs = Transaction.objects.filter(account_number=account_number).values('transaction_category').\
+                annotate(category_sum=Sum('transaction_amount')). \
             order_by('-category_sum')
             return qs

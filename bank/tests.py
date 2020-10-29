@@ -32,7 +32,7 @@ class BudgetAPIRouteTest(TestCase):
 
 class BudgetCategoryAPIRouteTest(TestCase):
     def test_budget_category_url_resolves_to_budget_category_view_set(self):
-        url = reverse('budget_category-list')
+        url = reverse('budget_summary-list')
         view = resolve(url).func.__name__
         self.assertEqual(view, 'TransactionCategorySum')
 
@@ -48,14 +48,13 @@ class TransactionAPITest(APITestCase):
             'transaction_type': 'D',
             'merchant_name': 'Costco',
             'transaction_category': 'GROCERIES',
-            'owner': 'prachi_sethi',
         }
 
         url = reverse('transactions-list')
         request = self.factory.post(path=url, data=payload)
         view = TransactionViewSet.as_view({'post': 'create'})
         response = view(request)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class BudgetTransactionAPITest(APITestCase):
@@ -70,12 +69,11 @@ class BudgetTransactionAPITest(APITestCase):
             'transaction_type': 'D',
             'merchant_name': 'Costco',
             'transaction_category': 'HOME',
-            'owner': 'prachi_sethi',
         }
 
         url = reverse('budget_transactions-list')
         request = self.factory.post(path=url, data=payload)
         view = BudgetTransactionViewSet.as_view({'post': 'create'})
         response = view(request)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
