@@ -80,9 +80,16 @@ class Account extends React.Component {
                   <td>
                       <select id="transaction_category" value={transaction.transaction_category} data-transaction-ref={transaction.transaction_id} data-account-number-ref={this.props.match.params.account_number} data-merchant-name-ref={transaction.merchant_name} onChange={this.onTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
-                          <option value="ELECTRONICS">ELECTRONICS</option>
-                          <option value="GAS">GAS</option>
-                          <option value="FOOD_AND_DRINKS">FOOD_AND_DRINKS</option>
+                          <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                          <option value="HOME">Home and Decor</option>
+                          <option value="FOOD_AND_DRINKS">Food and Drinks</option>
+                          <option value="ELECTRONICS">Electronics</option>
+                          <option value="PERSONAL">Personal</option>
+                          <option value="HEALTH">Health and Wellness</option>
+                          <option value="GAS">Gas</option>
+                          <option value="SHOPPING">Shopping</option>
+                          <option value="GIFT_AND_DONATION">Gift and Donations</option>
+                          <option value="OTHERS">Others</option>
                       </select>
                   </td>
                   <td><NavLink to={"/SplitTransaction/" + this.props.match.params.account_number + "/" + transaction.transaction_id + "/" + transaction.transaction_category + "/" + transaction.merchant_name}>Split Transaction</NavLink></td>

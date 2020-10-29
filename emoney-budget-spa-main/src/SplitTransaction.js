@@ -122,9 +122,16 @@ class SplitTransaction extends React.Component {
                   <td>
                       <select value={this.state.firstSplitTransaction.transaction_category} onChange={this.onFirstSplitTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
-                          <option value="ELECTRONICS">ELECTRONICS</option>
-                          <option value="GAS">GAS</option>
-                          <option value="FOOD_AND_DRINKS">FOOD_AND_DRINKS</option>
+                          <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                          <option value="HOME">Home and Decor</option>
+                          <option value="FOOD_AND_DRINKS">Food and Drinks</option>
+                          <option value="ELECTRONICS">Electronics</option>
+                          <option value="PERSONAL">Personal</option>
+                          <option value="HEALTH">Health and Wellness</option>
+                          <option value="GAS">Gas</option>
+                          <option value="SHOPPING">Shopping</option>
+                          <option value="GIFT_AND_DONATION">Gift and Donations</option>
+                          <option value="OTHERS">Others</option>
                       </select>
                   </td>
                 </tr>
@@ -139,9 +146,16 @@ class SplitTransaction extends React.Component {
                   <td>
                       <select value={this.state.secondSplitTransaction.transaction_category} onChange={this.onSecondSplitTransactionCategoryChanged}>
                           <option value="GROCERIES">GROCERIES</option>
-                          <option value="ELECTRONICS">ELECTRONICS</option>
-                          <option value="GAS">GAS</option>
-                          <option value="FOOD_AND_DRINKS">FOOD_AND_DRINKS</option>
+                          <option value="ENTERTAINMENT">ENTERTAINMENT</option>
+                          <option value="HOME">Home and Decor</option>
+                          <option value="FOOD_AND_DRINKS">Food and Drinks</option>
+                          <option value="ELECTRONICS">Electronics</option>
+                          <option value="PERSONAL">Personal</option>
+                          <option value="HEALTH">Health and Wellness</option>
+                          <option value="GAS">Gas</option>
+                          <option value="SHOPPING">Shopping</option>
+                          <option value="GIFT_AND_DONATION">Gift and Donations</option>
+                          <option value="OTHERS">Others</option>
                       </select>
                   </td>
                 </tr>
