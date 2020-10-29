@@ -57,6 +57,9 @@ class Account extends React.Component {
         const putUrl = 'http://127.0.0.1:8000/transactions/' + transaction_ref + "/";
         var response = await fetch(putUrl, optionsParentTransaction);
         await response.json();
+
+        // Reload Page
+        window.location.reload(false);
     }
 
   renderHeader() {
