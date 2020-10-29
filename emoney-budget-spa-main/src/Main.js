@@ -33,7 +33,7 @@ render() {
               <Route exact path="/" component={Login}/>
               <Route exact path="/Dashboard" component={Dashboard}/>
               <Route path="/Accounts/:account_number" component={Account}/>
-              <Route path="/SplitTransaction/:account_number/:parent_transaction_id/:parent_transaction_merchant_name" component={SplitTransaction}/>
+              <Route path="/SplitTransaction/:account_number/:parent_transaction_id/:parent_transaction_category/:parent_transaction_merchant_name/" component={SplitTransaction}/>
               <Route path="/SpendingSummary/:account_number" component={SpendingSummary}/>
               <Route component={NotFoundPage} />
             </Switch>

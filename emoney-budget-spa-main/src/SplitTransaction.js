@@ -12,7 +12,10 @@ class SplitTransaction extends React.Component {
         this.state = {
           splitRequestCompletedSuccessfully: false,
           parentTransaction: {
+            account_number: props.match.params.account_number,
+            merchant_name: props.match.params.parent_transaction_merchant_name,
             parent_transaction_id: props.match.params.parent_transaction_id,
+            transaction_category: props.match.params.parent_transaction_category,
             split_transactions_exist: true
           },
           firstSplitTransaction: {
@@ -69,7 +72,7 @@ class SplitTransaction extends React.Component {
         e.preventDefault();
 
         const postUrl = 'http://127.0.0.1:8000/budget/transactions/';
-        const putUrl = 'http://127.0.0.1:8000/transactions/' + this.props.match.params.parent_transaction_id;
+        const putUrl = 'http://127.0.0.1:8000/transactions/' + this.props.match.params.parent_transaction_id + "/";
 
         // Create: First split transaction
         const optionsFirstSplitTransaction = {
@@ -78,8 +81,7 @@ class SplitTransaction extends React.Component {
             body: JSON.stringify(this.state.firstSplitTransaction)
         };
 
-        const response = await fetch(postUrl, optionsFirstSplitTransaction);
-        await response.json();
+        var response = await fetch(postUrl, optionsFirstSplitTransaction);
 
         // Create: Second split transaction
         const optionsSecondSplitTransaction = {
@@ -89,7 +91,6 @@ class SplitTransaction extends React.Component {
         };
 
         response = await fetch(postUrl, optionsSecondSplitTransaction);
-        await response.json();
 
         // Update: Parent transaction
         const optionsParentTransaction = {
@@ -99,7 +100,6 @@ class SplitTransaction extends React.Component {
         };
 
         response = await fetch(putUrl, optionsParentTransaction);
-        await response.json();
 
         this.setState({
               splitRequestCompletedSuccessfully: true,
