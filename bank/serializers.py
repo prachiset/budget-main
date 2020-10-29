@@ -32,12 +32,12 @@ class AccountCustomerSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    # owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Transaction
         fields = ['account_number', 'transaction_id', 'merchant_name', 'transaction_amount', 'transaction_date',
-                  'transaction_type', 'transaction_category', 'owner']
+                  'transaction_type', 'transaction_category']
 
 
 class BudgetTransactionSerializer(serializers.ModelSerializer):

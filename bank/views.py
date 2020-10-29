@@ -20,10 +20,10 @@ class TransactionViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['account_number']
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    #
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
 
 class AccountCustomerViewSet(viewsets.ModelViewSet):
@@ -38,10 +38,10 @@ class BudgetTransactionViewSet(viewsets.ModelViewSet):
     serializer_class = BudgetTransactionSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['account_number']
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    #
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
 
 
 class TransactionCategorySum(viewsets.ModelViewSet):

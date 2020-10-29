@@ -68,7 +68,7 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=1, default='D', choices=TRANSACTION_TYPE, editable=True)
     merchant_name = models.CharField("Merchant Name", max_length=255)
     transaction_category = models.CharField(max_length=50, choices=TRANSACTION_CATEGORY)
-    owner = models.ForeignKey('auth.User', related_name='transaction', on_delete=models.CASCADE)
+    # owner = models.ForeignKey('auth.User', related_name='transaction', on_delete=models.CASCADE)
     parent_transaction_id = models.ForeignKey('self', null=True, on_delete=models.CASCADE)
     split_transactions_exist = models.BooleanField(default=False)
     is_split_transaction = models.BooleanField(default=False)
