@@ -3,7 +3,7 @@ import {
   Redirect,
   NavLink
 } from "react-router-dom";
-import logo from './split.png';
+import logo from './images/split.png';
 
 class SplitTransaction extends React.Component {
     constructor(props) {

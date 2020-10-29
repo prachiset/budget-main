@@ -2,7 +2,7 @@ import React from "react";
 import {
   NavLink
 } from "react-router-dom";
-import logo from './Accounts.jpg';
+import logo from './images/Accounts.jpg';
 
 class Dashboard extends React.Component {
     constructor() {

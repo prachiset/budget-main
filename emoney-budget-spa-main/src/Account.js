@@ -2,7 +2,7 @@ import React from "react";
 import {
   NavLink
 } from "react-router-dom";
-import logo from './Account.jpg';
+import logo from './images/Account.jpg';
 
 class Account extends React.Component {
     constructor(props) {

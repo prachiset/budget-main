@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from 'react-router-dom';
-import logo from './eMoney.png';
+import logo from './images/eMoney.png';
 
 
 class Login extends React.Component {
