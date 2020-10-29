@@ -69,7 +69,7 @@ class SplitTransaction extends React.Component {
         e.preventDefault();
 
         const postUrl = 'http://127.0.0.1:8000/budget/transactions/';
-        const putUrl = 'http://127.0.0.1:8000/budget/transactions/' + this.props.match.params.parent_transaction_id;
+        const putUrl = 'http://127.0.0.1:8000/transactions/' + this.props.match.params.parent_transaction_id;
 
         // Create: First split transaction
         const optionsFirstSplitTransaction = {
